@@ -34,8 +34,7 @@ const getAllUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     function sendToElasticAndLogToConsole(sql, queryObject) {
         // save the `sql` query in Elasticsearch
         console.log(sql);
-        console.log(queryObject);
-        // use the queryObject if needed (e.g. for debugging)
+        console.log(queryObject); // use the queryObject if needed (e.g. for debugging)
     }
     return res
         .status(200)

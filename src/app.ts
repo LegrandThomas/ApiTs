@@ -34,5 +34,5 @@ connection
     console.log("🔥🔥🔥  ! Erreur !   🔥🔥🔥", err);
   });
 app.listen(3000, () => {
-  console.log("💻 :Server NodeJs démaréé sur le port :" + process.env.PORT)
+  console.log("💻 :Server NodeJs démarée sur le port :" + process.env.PORT)
 });
