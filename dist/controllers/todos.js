@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateTodo = exports.getTodoById = exports.getAllToDo = exports.deleteToDo = exports.createToDo = void 0;
 const todos_1 = require("../models/todos");
 const createToDo = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var todos = yield todos_1.Todos.create(Object.assign({}, req.body));
+    let todos = yield todos_1.Todos.create(Object.assign({}, req.body));
     return res
         .status(200)
         .json({ message: "Todo created successfully", data: todos });

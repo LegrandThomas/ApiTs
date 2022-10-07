@@ -1,7 +1,9 @@
 import express from "express";
 import todoRoutes from "./routes/todos";
+import userRoutes from "./routes/users";
 import connection from "./db/config";
 import { json, urlencoded } from "body-parser";
+require('dotenv').config()
 
 const app = express();
 
@@ -10,6 +12,7 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 
 app.use("/todos", todoRoutes);
+app.use("/users", userRoutes);
 
 app.use(
   (
@@ -25,11 +28,11 @@ app.use(
 connection
   .sync()
   .then(() => {
-    console.log("Database successfully connected");
+    console.log("⚡️ Base de données connectée avec sucess !");
   })
   .catch((err) => {
-    console.log("Error", err);
+    console.log("🔥🔥🔥  ! Erreur !   🔥🔥🔥", err);
   });
 app.listen(3000, () => {
-  console.log("Server started on port 3000");
+  console.log("💻 :Server NodeJs démaréé sur le port :" + process.env.PORT)
 });
