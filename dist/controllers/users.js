@@ -28,7 +28,15 @@ const deleteUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
 });
 exports.deleteUser = deleteUser;
 const getAllUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const allUsers = yield users_1.Users.findAll();
+    const allUsers = yield users_1.Users.findAll({ logging: (sql, queryObject) => {
+            sendToElasticAndLogToConsole(sql, queryObject);
+        } });
+    function sendToElasticAndLogToConsole(sql, queryObject) {
+        // save the `sql` query in Elasticsearch
+        console.log(sql);
+        console.log(queryObject);
+        // use the queryObject if needed (e.g. for debugging)
+    }
     return res
         .status(200)
         .json({ message: "Listing des utilisateurs effectué avec sucess", data: allUsers });
