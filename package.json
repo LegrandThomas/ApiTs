@@ -9,10 +9,12 @@
   "author": "Thomas Legrand",
   "license": "ISC",
   "dependencies": {
+    "@types/nodemailer": "^6.4.6",
     "body-parser": "^1.20.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.1",
     "mysql2": "^2.3.3",
+    "nodemailer": "^6.8.0",
     "sequelize": "^6.23.2",
     "sequelize-typescript": "^2.1.3"
   },

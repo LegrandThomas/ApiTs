@@ -12,7 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateUser = exports.getUserById = exports.getAllUser = exports.deleteUser = exports.createUser = void 0;
 const users_1 = require("../models/users");
 const createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    let user = yield users_1.Users.create(Object.assign({}, req.body));
+    let user = yield users_1.Users.create(Object.assign({}, req.body), { logging: (sql, queryObject) => {
+            sendToLogToConsole(sql, queryObject);
+        } });
     return res
         .status(200)
         .json({ message: "Utilisateur créé avec sucess", data: user });
@@ -20,8 +22,12 @@ const createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
 exports.createUser = createUser;
 const deleteUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const deletedUser = yield users_1.Users.findByPk(id);
-    yield users_1.Users.destroy({ where: { id } });
+    const deletedUser = yield users_1.Users.findByPk(id, { logging: (sql, queryObject) => {
+            sendToLogToConsole(sql, queryObject);
+        } });
+    yield users_1.Users.destroy({ where: { id }, logging: (sql, queryObject) => {
+            sendToLogToConsole(sql, queryObject);
+        } });
     return res
         .status(200)
         .json({ message: "Utilisateur effacé avec sucess", data: deletedUser });
@@ -29,13 +35,8 @@ const deleteUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
 exports.deleteUser = deleteUser;
 const getAllUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const allUsers = yield users_1.Users.findAll({ logging: (sql, queryObject) => {
-            sendToElasticAndLogToConsole(sql, queryObject);
+            sendToLogToConsole(sql, queryObject);
         } });
-    function sendToElasticAndLogToConsole(sql, queryObject) {
-        // save the `sql` query in Elasticsearch
-        console.log(sql);
-        console.log(queryObject); // use the queryObject if needed (e.g. for debugging)
-    }
     return res
         .status(200)
         .json({ message: "Listing des utilisateurs effectué avec sucess", data: allUsers });
@@ -43,7 +44,9 @@ const getAllUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
 exports.getAllUser = getAllUser;
 const getUserById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const User = yield users_1.Users.findByPk(id);
+    const User = yield users_1.Users.findByPk(id, { logging: (sql, queryObject) => {
+            sendToLogToConsole(sql, queryObject);
+        } });
     return res
         .status(200)
         .json({ message: "Recherche d'utilisateur par ID effectué avec sucess", data: User });
@@ -51,10 +54,20 @@ const getUserById = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
 exports.getUserById = getUserById;
 const updateUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    yield users_1.Users.update(Object.assign({}, req.body), { where: { id } });
-    const updatedUser = yield users_1.Users.findByPk(id);
+    yield users_1.Users.update(Object.assign({}, req.body), { where: { id }, logging: (sql, queryObject) => {
+            sendToLogToConsole(sql, queryObject);
+        } });
+    const updatedUser = yield users_1.Users.findByPk(id, { logging: (sql, queryObject) => {
+            sendToLogToConsole(sql, queryObject);
+        } });
     return res
         .status(200)
         .json({ message: "Utilisateur mis à jour avec sucess", data: updatedUser });
 });
 exports.updateUser = updateUser;
+// fonction pour send requette + detail en console.log
+function sendToLogToConsole(sql, queryObject) {
+    // save the `sql` query in Elasticsearch
+    console.log(sql);
+    console.log(queryObject); // use the queryObject if needed (e.g. for debugging)
+}
