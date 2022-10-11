@@ -4,6 +4,8 @@ import userRoutes from "./routes/users";
 import mailRoutes from "./routes/mail";
 import connection from "./db/config";
 import { json, urlencoded } from "body-parser";
+import * as https from 'https';
+import * as fs from 'fs';
 require('dotenv').config()
 
 
@@ -35,6 +37,12 @@ connection
   .catch((err) => {
     console.log("🔥🔥🔥  ! Erreur !   🔥🔥🔥", err);
   });
-app.listen(3000, () => {
+
+  const httpsOptions = {
+    key: fs.readFileSync('./config/key.pem'),
+    cert: fs.readFileSync('./config/cert.pem')
+}
+
+https.createServer(httpsOptions, app).listen(3000, () => {
   console.log("💻 :Server NodeJs démaré sur le port :" + process.env.PORT)
 });
