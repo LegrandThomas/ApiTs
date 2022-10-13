@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import { Todos } from "../models/todos";
 import { Users } from "../models/users";
+import { contact_form } from "../models/mailing";
 require('dotenv').config()
 
 const connection = new Sequelize({
@@ -10,7 +11,7 @@ const connection = new Sequelize({
   password: process.env.PASSWORD,
   database: process.env.DB,
   logging: false,
-  models: [Todos,Users],
+  models: [Todos,Users,contact_form],
 });
 
 

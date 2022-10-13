@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && nodemon dist/app.js"
+    "start": " tsc && nodemon dist/app.js"
   },
   "author": "Thomas Legrand",
   "license": "ISC",
