@@ -3,7 +3,7 @@ import { Table, Model, Column, DataType } from "sequelize-typescript";
 
 
 @Table({
-    timestamps: false,
+    timestamps: true,
     tableName: "users",
   })
   export class Users extends Model {
@@ -24,4 +24,15 @@ import { Table, Model, Column, DataType } from "sequelize-typescript";
       allowNull: false,
     })
     password!: string;
+
+    @Column({
+      type: DataType.DATE,
+      allowNull: false,
+    })
+    createdAt!: Date;
+    @Column({
+      type: DataType.DATE,
+      allowNull: false,
+    })
+    updatedAt!: Date;
   }

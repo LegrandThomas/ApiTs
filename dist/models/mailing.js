@@ -40,6 +40,18 @@ __decorate([
         allowNull: false,
     })
 ], contact_form.prototype, "message_contact", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.DATE,
+        allowNull: false,
+    })
+], contact_form.prototype, "createdAt", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.DATE,
+        allowNull: false,
+    })
+], contact_form.prototype, "updatedAt", void 0);
 contact_form = __decorate([
     (0, sequelize_typescript_1.Table)({
         timestamps: true,

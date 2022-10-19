@@ -95,8 +95,8 @@ let transporter = nodemailer.createTransport({
    from: 'well.eat.test@gmail.com',
    to: 'pro.legrand.thomas@gmail.com',
    cc:'well.eat.test@gmail.com',
-   subject: 'Mail test',
-   text: 'petit test ;)'
+   subject: 'Réponse automatique',
+   text: 'Votre mail à bien était pris en compte\nCeci est une réponse automatique\n Merci de ne pas répondre'
   };
  
   transporter.sendMail(mailOptions, (error, info) => {

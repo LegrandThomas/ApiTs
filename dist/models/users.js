@@ -28,9 +28,21 @@ __decorate([
         allowNull: false,
     })
 ], Users.prototype, "password", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.DATE,
+        allowNull: false,
+    })
+], Users.prototype, "createdAt", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.DATE,
+        allowNull: false,
+    })
+], Users.prototype, "updatedAt", void 0);
 Users = __decorate([
     (0, sequelize_typescript_1.Table)({
-        timestamps: false,
+        timestamps: true,
         tableName: "users",
     })
 ], Users);

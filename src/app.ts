@@ -2,7 +2,7 @@ import express from "express";
 import todoRoutes from "./routes/todos";
 import userRoutes from "./routes/users";
 import mailRoutes from "./routes/mail";
-import connection from "./db/config";
+import {connection} from "./db/config";
 import { json, urlencoded } from "body-parser";
 import * as https from 'https';
 import * as fs from 'fs';
@@ -46,7 +46,7 @@ connection
 https.createServer(httpsOptions, app).listen(3000, () => {
   console.log("💻 :Server NodeJs démaré sur le port :" + process.env.PORT)
   
-let d=new Date();
-console.log(d);
+// let d=new Date();
+// console.log(d);
 
 });

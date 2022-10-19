@@ -30,7 +30,7 @@ const express_1 = __importDefault(require("express"));
 const todos_1 = __importDefault(require("./routes/todos"));
 const users_1 = __importDefault(require("./routes/users"));
 const mail_1 = __importDefault(require("./routes/mail"));
-const config_1 = __importDefault(require("./db/config"));
+const config_1 = require("./db/config");
 const body_parser_1 = require("body-parser");
 const https = __importStar(require("https"));
 const fs = __importStar(require("fs"));
@@ -44,7 +44,7 @@ app.use("/mail", mail_1.default);
 app.use((err, req, res, next) => {
     res.status(500).json({ message: err.message });
 });
-config_1.default
+config_1.connection
     .sync()
     .then(() => {
     console.log("⚡️ Base de données connectée avec sucess ! \n");
