@@ -16,7 +16,6 @@ export const getAllmanageable_data: RequestHandler = async (req, res, next) => {
   
 // fonction pour send requette + detail en console.log
 function sendToLogToConsole (sql: string, queryObject: number | undefined) {  
-    // save the `sql` query in Elasticsearch
     console.log(sql);
     console.log(queryObject); // use the queryObject if needed (e.g. for debugging)
   }

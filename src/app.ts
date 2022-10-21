@@ -45,8 +45,5 @@ connection
 
 https.createServer(httpsOptions, app).listen(3000, () => {
   console.log("💻 :Server NodeJs démaré sur le port :" + process.env.PORT)
-  
-// let d=new Date();
-// console.log(d);
 
 });

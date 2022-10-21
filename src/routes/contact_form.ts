@@ -11,7 +11,6 @@ import {
 } from "../controllers/contact_form";
 
 const router = Router();
-
 router.get("/", mailing);
 router.get("/listmail",getAllmess);
 router.post("/",create_message);

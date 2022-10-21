@@ -7,8 +7,6 @@ import {
 
 const router = Router();
 
-
-
 router.get("/",  getAllmanageable_data);
 
 export default router;
