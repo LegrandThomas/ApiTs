@@ -1,7 +1,7 @@
 import express from "express";
-import todoRoutes from "./routes/todos";
 import userRoutes from "./routes/users";
-import mailRoutes from "./routes/mail";
+import manageable_dataRoutes from "./routes/mangeable_data";
+import mailRoutes from "./routes/contact_form";
 import {connection} from "./db/config";
 import { json, urlencoded } from "body-parser";
 import * as https from 'https';
@@ -15,9 +15,9 @@ app.use(json());
 
 app.use(urlencoded({ extended: true }));
 
-app.use("/todos", todoRoutes);
 app.use("/users", userRoutes);
 app.use("/mail", mailRoutes);
+app.use("/data",manageable_dataRoutes);
 app.use(
   (
     err: Error,

@@ -13,11 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.mailing = exports.getAllmess = exports.updateMessage = exports.getMessageByName = exports.getMessageById = exports.delete_message = exports.create_message = void 0;
-const mailing_1 = require("../models/mailing");
+const contact_form_1 = require("../models/contact_form");
 const nodemailer_1 = __importDefault(require("nodemailer"));
 let date = new Date();
 const create_message = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    let mes = yield mailing_1.contact_form.create(Object.assign({}, req.body), { logging: (sql, queryObject) => {
+    let mes = yield contact_form_1.contact_form.create(Object.assign({}, req.body), { logging: (sql, queryObject) => {
             sendToLogToConsole(sql, queryObject);
         } });
     return res
@@ -27,10 +27,10 @@ const create_message = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
 exports.create_message = create_message;
 const delete_message = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const deletedMessage = yield mailing_1.contact_form.findByPk(id, { logging: (sql, queryObject) => {
+    const deletedMessage = yield contact_form_1.contact_form.findByPk(id, { logging: (sql, queryObject) => {
             sendToLogToConsole(sql, queryObject);
         } });
-    yield mailing_1.contact_form.destroy({ where: { id }, logging: (sql, queryObject) => {
+    yield contact_form_1.contact_form.destroy({ where: { id }, logging: (sql, queryObject) => {
             sendToLogToConsole(sql, queryObject);
         } });
     return res
@@ -40,7 +40,7 @@ const delete_message = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
 exports.delete_message = delete_message;
 const getMessageById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const Mess = yield mailing_1.contact_form.findByPk(id, { logging: (sql, queryObject) => {
+    const Mess = yield contact_form_1.contact_form.findByPk(id, { logging: (sql, queryObject) => {
             sendToLogToConsole(sql, queryObject);
         } });
     return res
@@ -50,7 +50,7 @@ const getMessageById = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
 exports.getMessageById = getMessageById;
 const getMessageByName = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const nom_contact = req.params.nom_contact;
-    const Mess = yield mailing_1.contact_form.findOne({ where: { nom_contact }, logging: (sql, queryObject) => {
+    const Mess = yield contact_form_1.contact_form.findOne({ where: { nom_contact }, logging: (sql, queryObject) => {
             sendToLogToConsole(sql, queryObject);
         } });
     return res
@@ -60,10 +60,10 @@ const getMessageByName = (req, res, next) => __awaiter(void 0, void 0, void 0, f
 exports.getMessageByName = getMessageByName;
 const updateMessage = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    yield mailing_1.contact_form.update(Object.assign({}, req.body), { where: { id }, logging: (sql, queryObject) => {
+    yield contact_form_1.contact_form.update(Object.assign({}, req.body), { where: { id }, logging: (sql, queryObject) => {
             sendToLogToConsole(sql, queryObject);
         } });
-    const updatedUser = yield mailing_1.contact_form.findByPk(id, { logging: (sql, queryObject) => {
+    const updatedUser = yield contact_form_1.contact_form.findByPk(id, { logging: (sql, queryObject) => {
             sendToLogToConsole(sql, queryObject);
         } });
     return res
@@ -72,7 +72,7 @@ const updateMessage = (req, res, next) => __awaiter(void 0, void 0, void 0, func
 });
 exports.updateMessage = updateMessage;
 const getAllmess = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const allmess = yield mailing_1.contact_form.findAll({ logging: (sql, queryObject) => {
+    const allmess = yield contact_form_1.contact_form.findAll({ logging: (sql, queryObject) => {
             sendToLogToConsole(sql, queryObject);
         } });
     return res
@@ -99,8 +99,8 @@ const mailing = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
         from: 'well.eat.test@gmail.com',
         to: 'pro.legrand.thomas@gmail.com',
         cc: 'well.eat.test@gmail.com',
-        subject: 'Péponse automatique',
-        text: 'Votre mail à bien était pris en compte\nCeci est une réponse automatique\n Merci de ne pas répondre'
+        subject: 'Réponse automatique',
+        text: 'Votre demande de contact à bien était prise en compte\nCeci est une réponse automatique\nMerci de ne pas répondre'
     };
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {

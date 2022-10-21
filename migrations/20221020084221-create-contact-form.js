@@ -2,21 +2,26 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('contact_form', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      nom_contact: {
         type: Sequelize.STRING
       },
-      email: {
-        type: Sequelize.STRING,
-        unique:true
+      prenom_contact: {
+        type: Sequelize.STRING
       },
-      password: {
+      email_contact: {
+        type: Sequelize.STRING
+      },
+      societe_contact: {
+        type: Sequelize.STRING
+      },
+      message_contact: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -30,6 +35,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('contact_forms');
   }
 };

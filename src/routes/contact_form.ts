@@ -8,7 +8,7 @@ import {
     getMessageById,
     updateMessage,
     getMessageByName
-} from "../controllers/mailing";
+} from "../controllers/contact_form";
 
 const router = Router();
 

@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import {contact_form} from "../models/mailing"
+import {contact_form} from "../models/contact_form"
 import nodemailer from "nodemailer";
 
 let date = new Date();
@@ -96,7 +96,7 @@ let transporter = nodemailer.createTransport({
    to: 'pro.legrand.thomas@gmail.com',
    cc:'well.eat.test@gmail.com',
    subject: 'Réponse automatique',
-   text: 'Votre mail à bien était pris en compte\nCeci est une réponse automatique\n Merci de ne pas répondre'
+   text: 'Votre demande de contact à bien était prise en compte\nCeci est une réponse automatique\nMerci de ne pas répondre'
   };
  
   transporter.sendMail(mailOptions, (error, info) => {
