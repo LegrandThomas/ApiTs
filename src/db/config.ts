@@ -17,8 +17,8 @@ require('dotenv').config()
 
 // export default connection;
 export const connection =new Sequelize('gtbuqdkd','gtbuqdkd','P3FrZufG7CUy5lmuzdwuiTcCD_77scrO',{
-    host:'mouse.db.elephantsql.com',
+    host:process.env.DATABASE_URL,
     dialect:'postgres',
-    logging: false,
+    logging: true,
     models: [Users,contact_form,manageable_data],
       });
