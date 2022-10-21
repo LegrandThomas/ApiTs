@@ -122,7 +122,6 @@ exports.mailing = mailing;
 // fin test
 // fonction pour send requette + detail en console.log
 function sendToLogToConsole(sql, queryObject) {
-    // save the `sql` query in Elasticsearch
     console.log(sql);
     console.log(queryObject); // use the queryObject if needed (e.g. for debugging)
 }
