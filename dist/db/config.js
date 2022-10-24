@@ -12,4 +12,8 @@ exports.connection = new sequelize_typescript_1.Sequelize('gtbuqdkd', 'gtbuqdkd'
     dialect: 'postgres',
     logging: false,
     models: [users_1.Users, contact_form_1.contact_form, manageable_data_1.manageable_data],
+    pool: {
+        idle: 10000,
+        evict: 20000, // milliseconds
+    }
 });

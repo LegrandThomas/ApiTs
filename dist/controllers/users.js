@@ -14,10 +14,20 @@ const users_1 = require("../models/users");
 const createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     let user = yield users_1.Users.create(Object.assign({}, req.body), { logging: (sql, queryObject) => {
             sendToLogToConsole(sql, queryObject);
-        } });
-    return res
-        .status(200)
-        .json({ message: "Utilisateur créé avec sucess", data: user });
+        } }).catch((e) => {
+        console.log(e);
+        if (e) {
+            console.log("erreur violation duplicata");
+            return res
+                .status(500)
+                .json({ message: "Utilisateur avec cette adresse mail existe déjà en bdd" });
+        }
+        else {
+            return res
+                .status(200)
+                .json({ message: "Utilisateur créé avec sucess", data: user });
+        }
+    });
 });
 exports.createUser = createUser;
 const deleteUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {

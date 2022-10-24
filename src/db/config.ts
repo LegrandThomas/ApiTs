@@ -11,4 +11,8 @@ export const connection =new Sequelize('gtbuqdkd','gtbuqdkd','P3FrZufG7CUy5lmuzd
     dialect:'postgres',
     logging: false,
     models: [Users,contact_form,manageable_data],
+    pool: {
+      idle: 10000, // milliseconds
+      evict: 20000, // milliseconds
+  }
       });
