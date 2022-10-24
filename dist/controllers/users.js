@@ -12,22 +12,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateUser = exports.getUserById = exports.getAllUser = exports.deleteUser = exports.createUser = void 0;
 const users_1 = require("../models/users");
 const createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    let c = 200;
     let user = yield users_1.Users.create(Object.assign({}, req.body), { logging: (sql, queryObject) => {
             sendToLogToConsole(sql, queryObject);
         } }).catch((e) => {
-        console.log(e);
         if (e) {
-            console.log("erreur violation duplicata");
-            return res
-                .status(500)
-                .json({ message: "Utilisateur avec cette adresse mail existe déjà en bdd" });
+            c = 500;
         }
         else {
-            return res
-                .status(200)
-                .json({ message: "Utilisateur créé avec sucess", data: user });
+            c = 200;
         }
     });
+    if (c == 200) {
+        console.log("status: " + c);
+        return res
+            .status(200)
+            .json({ message: "Utilisateur créé avec sucess", data: user });
+    }
+    else {
+        console.log("status: " + c);
+        return res
+            .status(500)
+            .json({ message: "Utilisateur avec cette adresse mail existe déjà en bdd" });
+    }
 });
 exports.createUser = createUser;
 const deleteUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -75,9 +82,7 @@ const updateUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         .json({ message: "Utilisateur mis à jour avec sucess", data: updatedUser });
 });
 exports.updateUser = updateUser;
-// fonction pour send requette + detail en console.log
 function sendToLogToConsole(sql, queryObject) {
-    // save the `sql` query in Elasticsearch
-    console.log(sql);
-    console.log(queryObject); // use the queryObject if needed (e.g. for debugging)
+    // console.log(sql);
+    // console.log(queryObject);
 }

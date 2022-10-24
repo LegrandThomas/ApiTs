@@ -4,20 +4,23 @@ import { Users } from "../models/users";
 
 
 export const createUser: RequestHandler = async (req, res, next) => {
+  let c:number=200;
   let user:any = await Users.create({ ...req.body },{logging:(sql, queryObject) => {
     sendToLogToConsole(sql, queryObject)
   }}).catch((e: { code: string; }) => {
-    console.log(e);
-    if (e){
-      console.log("erreur violation duplicata");
-      return res
-      .status(500)
-      .json({ message: "Utilisateur avec cette adresse mail existe déjà en bdd" });
-  }else{
+    if (e){c=500}
+    else{c=200}
+    });
+    if(c==200){
   return res
-    .status(200)
-    .json({ message: "Utilisateur créé avec sucess", data: user });
-  }})};
+  .status(200)
+  .json({ message: "Utilisateur créé avec sucess",data:user})
+      }else{
+  return res
+  .status(500)
+  .json({ message: "Utilisateur avec cette adresse mail existe déjà en bdd" })}
+}
+
 
 export const deleteUser: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
@@ -65,11 +68,12 @@ export const updateUser: RequestHandler = async (req, res, next) => {
     .json({ message: "Utilisateur mis à jour avec sucess", data: updatedUser });
 };
 
-// fonction pour send requette + detail en console.log
+
+
+
 function sendToLogToConsole (sql: string, queryObject: number | undefined) {  
-  // save the `sql` query in Elasticsearch
-  console.log(sql);
-  console.log(queryObject); // use the queryObject if needed (e.g. for debugging)
+  // console.log(sql);
+  // console.log(queryObject);
  
 }
 
