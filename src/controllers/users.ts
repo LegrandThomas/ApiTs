@@ -21,7 +21,6 @@ export const createUser: RequestHandler = async (req, res, next) => {
   .json({ message: "Utilisateur avec cette adresse mail existe déjà en bdd" })}
 }
 
-
 export const deleteUser: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
   const deletedUser: Users | null = await Users.findByPk(id,{logging:(sql, queryObject) => {

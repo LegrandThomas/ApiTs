@@ -24,13 +24,11 @@ const createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         }
     });
     if (c == 200) {
-        console.log("status: " + c);
         return res
             .status(200)
             .json({ message: "Utilisateur créé avec sucess", data: user });
     }
     else {
-        console.log("status: " + c);
         return res
             .status(500)
             .json({ message: "Utilisateur avec cette adresse mail existe déjà en bdd" });
