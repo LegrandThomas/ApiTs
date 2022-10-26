@@ -30,6 +30,8 @@ const express_1 = __importDefault(require("express"));
 const users_1 = __importDefault(require("./routes/users"));
 const mangeable_data_1 = __importDefault(require("./routes/mangeable_data"));
 const contact_form_1 = __importDefault(require("./routes/contact_form"));
+const users_reviews_1 = __importDefault(require("./routes/users_reviews"));
+const earnings_simulator_1 = __importDefault(require("./routes/earnings_simulator"));
 const config_1 = require("./db/config");
 const body_parser_1 = require("body-parser");
 const https = __importStar(require("https"));
@@ -42,6 +44,8 @@ app.use((0, body_parser_1.urlencoded)({ extended: true }));
 app.use("/users", users_1.default);
 app.use("/mail", contact_form_1.default);
 app.use("/data", mangeable_data_1.default);
+app.use("/avis", users_reviews_1.default);
+app.use("/earning_simulator", earnings_simulator_1.default);
 app.use((err, req, res, next) => {
     res.status(500).json({ message: err.message });
 });

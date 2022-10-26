@@ -2,6 +2,8 @@ import express from "express";
 import userRoutes from "./routes/users";
 import manageable_dataRoutes from "./routes/mangeable_data";
 import mailRoutes from "./routes/contact_form";
+import AvisRoutes from "./routes/users_reviews";
+import EarningsSimulator from "./routes/earnings_simulator";
 import {connection} from "./db/config";
 import { json, urlencoded } from "body-parser";
 import * as https from 'https';
@@ -18,6 +20,9 @@ app.use(urlencoded({ extended: true }));
 app.use("/users", userRoutes);
 app.use("/mail", mailRoutes);
 app.use("/data",manageable_dataRoutes);
+app.use("/avis",AvisRoutes);
+app.use("/earning_simulator",EarningsSimulator);
+
 app.use(
   (
     err: Error,
