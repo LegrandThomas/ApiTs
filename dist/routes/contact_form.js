@@ -5,7 +5,7 @@ const contact_form_1 = require("../controllers/contact_form");
 const router = (0, express_1.Router)();
 router.get("/", contact_form_1.mailing);
 router.get("/listmail", contact_form_1.getAllmess);
-router.post("/", contact_form_1.create_message);
+router.post("/", contact_form_1.create_message, contact_form_1.mailing);
 router.delete("/:id", contact_form_1.delete_message);
 router.get("/:id", contact_form_1.getMessageById);
 router.get("/listmail/:nom_contact", contact_form_1.getMessageByName);

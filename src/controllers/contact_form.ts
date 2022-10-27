@@ -9,10 +9,13 @@ export const create_message: RequestHandler = async (req, res, next) => {
   let mes = await contact_form.create({ ...req.body },{logging:(sql, queryObject) => {
     sendToLogToConsole(sql, queryObject)
   }});
+  
+  next();
   return res
     .status(200)
-    .json({ message: "message enregistré avec sucess le "+ date , data: mes });
-};
+    .json({ message: "message enregistré avec sucess le "+ date + " un mail de confirmation vient de vous être envoyé" , data: mes });
+
+  };
 
 
 export const delete_message: RequestHandler = async (req, res, next) => {
@@ -131,8 +134,6 @@ let transporter = nodemailer.createTransport({
   console.log("en date du : " +Date());
   console.log("Mail également transmis pour sauvegarde à : "+mailOptions.cc+"\n");
  
-  return res
-  .json({ message: "Mail envoyé avec sucess!!!!!!"});
 }); 
 }
 

@@ -20,9 +20,10 @@ const create_message = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
     let mes = yield contact_form_1.contact_form.create(Object.assign({}, req.body), { logging: (sql, queryObject) => {
             sendToLogToConsole(sql, queryObject);
         } });
+    next();
     return res
         .status(200)
-        .json({ message: "message enregistré avec sucess le " + date, data: mes });
+        .json({ message: "message enregistré avec sucess le " + date + " un mail de confirmation vient de vous être envoyé", data: mes });
 });
 exports.create_message = create_message;
 const delete_message = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {

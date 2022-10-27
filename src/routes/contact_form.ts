@@ -16,7 +16,7 @@ const router = Router();
 
 router.get("/", mailing);
 router.get("/listmail",getAllmess);
-router.post("/",create_message);
+router.post("/",create_message,mailing);
 router.delete("/:id", delete_message);
 router.get("/:id",getMessageById);
 
