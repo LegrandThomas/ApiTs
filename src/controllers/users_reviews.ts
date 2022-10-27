@@ -48,6 +48,16 @@ export const getUsersReviewsByName: RequestHandler = async (req, res, next) => {
     .json({ message: "Recherche de l'avis utilisateur par name effectuée avec sucess", data: Mess });
 };
 
+
+export const getUsersReviewsPinTrue: RequestHandler = async (req, res, next) => {
+    const  pin_users_reviews = req.params.pin;
+    const Mess: Users_reviews | null = await Users_reviews.findOne({ where: { pin_users_reviews},logging:(sql, queryObject) => {
+      sendToLogToConsole(sql, queryObject) }});
+    return res
+      .status(200)
+      .json({ message: "Recherche de l'avis utilisateur épinglé effectuée avec sucess", data: Mess });
+  };
+
 export const updateUsersReviews: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
   await Users_reviews.update({ ...req.body }, { where: { id } ,logging:(sql, queryObject) => {

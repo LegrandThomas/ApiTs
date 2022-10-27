@@ -5,6 +5,7 @@ const users_reviews_1 = require("../controllers/users_reviews");
 const router = (0, express_1.Router)();
 router.post("/", users_reviews_1.create_users_reviews);
 router.get("/", users_reviews_1.getAllUsersReviews);
+router.get("/pins/:pin", users_reviews_1.getUsersReviewsPinTrue);
 router.get("/:id", users_reviews_1.getUsersReviewsById);
 router.get("/AvisUtilisateurs/:name", users_reviews_1.getUsersReviewsByName);
 router.put("/:id", users_reviews_1.updateUsersReviews);

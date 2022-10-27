@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllUsersReviews = exports.updateUsersReviews = exports.getUsersReviewsByName = exports.getUsersReviewsById = exports.delete_users_reviews = exports.create_users_reviews = void 0;
+exports.getAllUsersReviews = exports.updateUsersReviews = exports.getUsersReviewsPinTrue = exports.getUsersReviewsByName = exports.getUsersReviewsById = exports.delete_users_reviews = exports.create_users_reviews = void 0;
 const users_reviews_1 = require("../models/users_reviews");
 const create_users_reviews = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     let mes = yield users_reviews_1.Users_reviews.create(Object.assign({}, req.body), { logging: (sql, queryObject) => {
@@ -53,6 +53,16 @@ const getUsersReviewsByName = (req, res, next) => __awaiter(void 0, void 0, void
         .json({ message: "Recherche de l'avis utilisateur par name effectuée avec sucess", data: Mess });
 });
 exports.getUsersReviewsByName = getUsersReviewsByName;
+const getUsersReviewsPinTrue = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const pin_users_reviews = req.params.pin;
+    const Mess = yield users_reviews_1.Users_reviews.findOne({ where: { pin_users_reviews }, logging: (sql, queryObject) => {
+            sendToLogToConsole(sql, queryObject);
+        } });
+    return res
+        .status(200)
+        .json({ message: "Recherche de l'avis utilisateur épinglé effectuée avec sucess", data: Mess });
+});
+exports.getUsersReviewsPinTrue = getUsersReviewsPinTrue;
 const updateUsersReviews = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     yield users_reviews_1.Users_reviews.update(Object.assign({}, req.body), { where: { id }, logging: (sql, queryObject) => {

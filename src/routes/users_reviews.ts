@@ -6,7 +6,8 @@ import {
     getAllUsersReviews,
     updateUsersReviews,
     getUsersReviewsById,
-    getUsersReviewsByName
+    getUsersReviewsByName,
+    getUsersReviewsPinTrue
   } from "../controllers/users_reviews";
 
 const router = Router();
@@ -14,6 +15,7 @@ const router = Router();
 router.post("/", create_users_reviews);
 
 router.get("/",  getAllUsersReviews);
+router.get("/pins/:pin",  getUsersReviewsPinTrue);
 
 router.get("/:id",getUsersReviewsById);
 

@@ -24,6 +24,12 @@ module.exports = {
       message_contact: {
         type: Sequelize.STRING
       },
+      demande_rappel: {
+        type: Sequelize.BOOLEAN
+      },
+      inscrit_newsletter: {
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
