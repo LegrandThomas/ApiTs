@@ -37,11 +37,25 @@ import { Table, Model, Column, DataType, } from "sequelize-typescript";
         allowNull: false,
       })
       message_contact!: string;
+
+      @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+      })
+      demande_rappel!: boolean;
+
+      @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+      })
+      inscrit_newsletter!: boolean;
+
       @Column({
         type: DataType.DATE,
         allowNull: false,
       })
       createdAt!: Date;
+
       @Column({
         type: DataType.DATE,
         allowNull: false,

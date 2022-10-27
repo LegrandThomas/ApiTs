@@ -50,6 +50,24 @@ export const getMessageByName: RequestHandler = async (req, res, next) => {
     .json({ message: "Recherche du message par name effectuée avec sucess", data: Mess });
 };
 
+export const getMessageByDemandeRappel: RequestHandler = async (req, res, next) => {
+  const  demande_rappel = req.params.demande_rappel;
+  const Mess: contact_form | null = await contact_form.findOne({ where: { demande_rappel },logging:(sql, queryObject) => {
+    sendToLogToConsole(sql, queryObject) }});
+  return res
+    .status(200)
+    .json({ message: "Recherche tous ceux qui ont fait une demande de rappel effectué avec sucess", data: Mess });
+};
+
+export const getMessageByDemandeNewsletter: RequestHandler = async (req, res, next) => {
+  const  inscrit_newsletter = req.params.inscrit_newsletter;
+  const Mess: contact_form | null = await contact_form.findOne({ where: { inscrit_newsletter },logging:(sql, queryObject) => {
+    sendToLogToConsole(sql, queryObject) }});
+  return res
+    .status(200)
+    .json({ message: "Recherche tous ceux qui sont inscrit à la newsletter effectué avec sucess", data: Mess });
+};
+
 export const updateMessage: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
   await contact_form.update({ ...req.body }, { where: { id } ,logging:(sql, queryObject) => {

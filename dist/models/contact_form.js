@@ -42,6 +42,18 @@ __decorate([
 ], contact_form.prototype, "message_contact", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.BOOLEAN,
+        allowNull: false,
+    })
+], contact_form.prototype, "demande_rappel", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.BOOLEAN,
+        allowNull: false,
+    })
+], contact_form.prototype, "inscrit_newsletter", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.DATE,
         allowNull: false,
     })

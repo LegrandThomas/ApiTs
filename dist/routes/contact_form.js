@@ -9,5 +9,7 @@ router.post("/", contact_form_1.create_message);
 router.delete("/:id", contact_form_1.delete_message);
 router.get("/:id", contact_form_1.getMessageById);
 router.get("/listmail/:nom_contact", contact_form_1.getMessageByName);
+router.get("/listrappel/:demande_rappel", contact_form_1.getMessageByDemandeRappel);
+router.get("/listnewsletter/:inscrit_newsletter", contact_form_1.getMessageByDemandeNewsletter);
 router.put("/:id", contact_form_1.updateMessage);
 exports.default = router;

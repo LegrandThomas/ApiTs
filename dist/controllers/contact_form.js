@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mailing = exports.getAllmess = exports.updateMessage = exports.getMessageByName = exports.getMessageById = exports.delete_message = exports.create_message = void 0;
+exports.mailing = exports.getAllmess = exports.updateMessage = exports.getMessageByDemandeNewsletter = exports.getMessageByDemandeRappel = exports.getMessageByName = exports.getMessageById = exports.delete_message = exports.create_message = void 0;
 const contact_form_1 = require("../models/contact_form");
 const nodemailer_1 = __importDefault(require("nodemailer"));
 let date = new Date();
@@ -58,6 +58,26 @@ const getMessageByName = (req, res, next) => __awaiter(void 0, void 0, void 0, f
         .json({ message: "Recherche du message par name effectuée avec sucess", data: Mess });
 });
 exports.getMessageByName = getMessageByName;
+const getMessageByDemandeRappel = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const demande_rappel = req.params.demande_rappel;
+    const Mess = yield contact_form_1.contact_form.findOne({ where: { demande_rappel }, logging: (sql, queryObject) => {
+            sendToLogToConsole(sql, queryObject);
+        } });
+    return res
+        .status(200)
+        .json({ message: "Recherche tous ceux qui ont fait une demande de rappel effectué avec sucess", data: Mess });
+});
+exports.getMessageByDemandeRappel = getMessageByDemandeRappel;
+const getMessageByDemandeNewsletter = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const inscrit_newsletter = req.params.inscrit_newsletter;
+    const Mess = yield contact_form_1.contact_form.findOne({ where: { inscrit_newsletter }, logging: (sql, queryObject) => {
+            sendToLogToConsole(sql, queryObject);
+        } });
+    return res
+        .status(200)
+        .json({ message: "Recherche tous ceux qui sont inscrit à la newsletter effectué avec sucess", data: Mess });
+});
+exports.getMessageByDemandeNewsletter = getMessageByDemandeNewsletter;
 const updateMessage = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     yield contact_form_1.contact_form.update(Object.assign({}, req.body), { where: { id }, logging: (sql, queryObject) => {

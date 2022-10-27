@@ -7,7 +7,7 @@ import {
     updateUsersReviews,
     getUsersReviewsById,
     getUsersReviewsByName,
-    getUsersReviewsPinTrue
+    getUsersReviewsPinTrue,
   } from "../controllers/users_reviews";
 
 const router = Router();
