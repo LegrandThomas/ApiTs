@@ -34,11 +34,19 @@ const users_reviews_1 = __importDefault(require("./routes/users_reviews"));
 const earnings_simulator_1 = __importDefault(require("./routes/earnings_simulator"));
 const config_1 = require("./db/config");
 const body_parser_1 = require("body-parser");
-const https = __importStar(require("https"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const fs = __importStar(require("fs"));
+const cors_1 = __importDefault(require("cors"));
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const app = (0, express_1.default)();
+// const cors = require('cors');
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true,
+    optionSuccessStatus: 200
+};
+app.use((0, cors_1.default)(corsOptions));
 app.use((0, body_parser_1.json)());
 app.use((0, body_parser_1.urlencoded)({ extended: true }));
 app.use("/users", users_1.default);
@@ -48,6 +56,13 @@ app.use("/avis", users_reviews_1.default);
 app.use("/earning_simulator", earnings_simulator_1.default);
 app.use((err, req, res, next) => {
     res.status(500).json({ message: err.message });
+});
+// app.use(cors({ credentials:true, origin:'http://localhost:3000' }));
+app.use((0, cookie_parser_1.default)());
+app.use(express_1.default.json());
+app.get("/", (req, res) => {
+    console.log("Connected to React");
+    res.send({ message: "Hello World!" });
 });
 const user = {
     name: process.env.NameAdminUser,
@@ -122,6 +137,9 @@ const httpsOptions = {
     key: fs.readFileSync('./config/key.pem'),
     cert: fs.readFileSync('./config/cert.pem')
 };
-https.createServer(httpsOptions, app).listen(3000, () => {
+// https.createServer(httpsOptions, app).listen(5000, () => {
+//   console.log("💻 :Server NodeJs démaré sur le port :" + process.env.PORT)
+// });
+app.listen(5000, () => {
     console.log("💻 :Server NodeJs démaré sur le port :" + process.env.PORT);
 });

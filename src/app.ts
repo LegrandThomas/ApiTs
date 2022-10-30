@@ -6,12 +6,22 @@ import AvisRoutes from "./routes/users_reviews";
 import EarningsSimulator from "./routes/earnings_simulator";
 import {connection} from "./db/config";
 import { json, urlencoded } from "body-parser";
+import cookieParser from "cookie-parser";
 import * as https from 'https';
 import * as fs from 'fs';
+import cors from 'cors';
 require('dotenv').config()
 const jwt = require('jsonwebtoken');
 
 const app = express();
+
+// const cors = require('cors');
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 
 app.use(json());
 
@@ -33,6 +43,20 @@ app.use(
     res.status(500).json({ message: err.message });
   }
 );
+
+
+
+
+ 
+// app.use(cors({ credentials:true, origin:'http://localhost:3000' }));
+app.use(cookieParser());
+app.use(express.json());
+
+
+app.get("/", (req, res) => {
+  console.log("Connected to React");
+  res.send({ message: "Hello World!" })
+})
 
 const user = {
   name: process.env.NameAdminUser,
@@ -125,7 +149,15 @@ connection
     cert: fs.readFileSync('./config/cert.pem')
 }
 
-https.createServer(httpsOptions, app).listen(3000, () => {
+
+// https.createServer(httpsOptions, app).listen(5000, () => {
+//   console.log("💻 :Server NodeJs démaré sur le port :" + process.env.PORT)
+
+// });
+
+app.listen(5000, () => {
   console.log("💻 :Server NodeJs démaré sur le port :" + process.env.PORT)
 
 });
+
+

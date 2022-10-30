@@ -135,8 +135,6 @@ const mailing = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
         console.log("sujet :" + mailOptions.subject + "\nmessage :" + mailOptions.text);
         console.log("en date du : " + Date());
         console.log("Mail également transmis pour sauvegarde à : " + mailOptions.cc + "\n");
-        return res
-            .json({ message: "Mail envoyé avec sucess!!!!!!" });
     });
 });
 exports.mailing = mailing;
