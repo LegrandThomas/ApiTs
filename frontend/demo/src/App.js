@@ -7,6 +7,7 @@ import React from "react";
 
 const baseURL="http://localhost:5000/users";
 
+
 export default function App(){
 const[post,setPost]=React.useState(null);
 
@@ -18,43 +19,24 @@ axios.get(baseURL).then((response)=>{
 
 if(!post)return null;
 console.log(post);
+// console.log(post.data[0].id);
 return(
 <div>
   <h1>{"coucou l'api répond bien reste a afficher ce qu'on reçoit"}</h1>
-  <p>{post.name}</p>
-  <p>{post.email}</p>
-  <p>{post.password}</p>
-  <p>{post.createdAt}</p>
-  <p>{post.updatedAt}</p>
+  <hr></hr>
+  <p>{" voici par exemple les infos du 1er users de présent dans la table 🥳🥳🥳 "}</p>
+  <br></br>
+  <p>{post.data[0].id}</p>
+  <p>{post.data[0].name}</p>
+  <p>{post.data[0].email}</p>
+  <p>{post.data[0].password}</p>
+  <p>{post.data[0].createdAt}</p>
+  <p>{post.data[0].updatedAt}</p>
 </div>
 
 );
 
 }
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" 
-//              alt="logo" />
-          
-// <p>A simple React app.....</p>
-  
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//         <form action="../../post" method="post" 
-//               className="form">
-//           <button type="submit">Connected?</button>
-//         </form>
-//       </header>
-//     </div>
-//   );
-// }
-  
-// export default App;
+
+
+
